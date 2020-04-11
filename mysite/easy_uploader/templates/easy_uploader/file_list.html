@@ -1,0 +1,63 @@
+{% extends "easy_uploader/base.html" %}
+{% block file_page %}active{% endblock %}
+{% block content %}
+
+  <div class="container">
+      {% if category_pk %}
+      <a href="{% url 'easy_uploader:file_create' category_pk %}" class="btn btn-outline-primary">
+          新規作成
+      </a>
+      {% else %}
+      <a href="{% url 'easy_uploader:file_create' %}" class="btn btn-outline-primary">
+          新規作成
+      </a>      
+      {% endif %}
+      <hr>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>タイトル</th>
+          <th>ファイル名</th>
+          <th>間接リンク</th>
+          <th>カテゴリ</th>
+          <th>作成日</th>
+          <th>#</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for file in file_list %}
+          <tr>
+            <td>{{ file.title }}</td>
+            <td>{{ file.get_filename }}</td>
+            <td>
+                <a href="{% url 'easy_uploader:indirect_link' file.pk %}" target="_blank">
+                    {% url 'easy_uploader:indirect_link' file.pk %}
+                </a>
+            </td>
+            <td><a href="{% url 'easy_uploader:file_category' file.category.pk %}">{{ file.category.name }}</a></td>
+            <td>{{ file.created_at }}</td>
+            <td>
+                <a href="{% url 'easy_uploader:file_update' file.pk %}" class="btn btn-outline-primary btn-sm">
+                  更新
+                </a>
+                <form class="delete-form" action="{% url 'easy_uploader:file_delete' file.pk %}" method="POST">
+                    <button type="button" class="btn btn-outline-primary btn-sm delete">削除</button>
+                    {% csrf_token %}
+                </form>
+                <a href="{{ file.src.url }}" target="_blank" class="btn btn-outline-primary btn-sm">
+                  ブラウザで開く
+                </a>
+                <a href="{{ file.src.url }}" download="{{ file.get_filename }}" class="btn btn-outline-primary btn-sm">
+                  ダウンロード
+                </a>
+
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <div class="text-center">
+      {% include "easy_uploader/page.html" %}
+    </div>
+  </div>
+{% endblock %}

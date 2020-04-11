@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta content="text/html; charset=utf-8">
+  <title>Uploading Image</title>
+<!--  <link rel="stylesheet" href="/static/css/bootstrap.min.css" />-->
+</head>
+<body>
+  <form method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      <input type="file" name="img" multiple="multiple"><button type="submit">Upload File</button></form>
+  <HR>
+
+  <form action="/hello/show" method="get">
+    <!--    {% csrf_token %}--><input type="submit" value="Content Show"> </form>
+</body>
+</html>

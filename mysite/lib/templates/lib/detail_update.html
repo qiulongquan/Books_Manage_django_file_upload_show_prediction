@@ -1,0 +1,25 @@
+<!--lib/templates/lib/detail_update.html-->
+<html lang="en">
+<h1>Book List</h1>
+<head>
+</head>
+<body>
+{% for book in book_list.all %}
+<form action="{% url 'lib:update_info' book.id %}" method="post" name="update_info">
+    {% csrf_token %}
+<table>
+
+    <p><span>Book name：</span><input type="text"  name="name" value={{ book.name }}> </p>
+    <p><span>Author：</span><input type="text"  name="author" value={{ book.author }}></p>
+    <p><span>Publishing House：</span><input type="text"  name="pub_house" value={{ book.pub_house }}></p>
+
+</table>
+    {% endfor %}
+    <input type="submit" value="Modify">
+</form>
+
+</body>
+
+</html>
+
+

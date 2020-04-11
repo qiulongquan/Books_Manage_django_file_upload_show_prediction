@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>welcome</title>
+</head>
+<body align="center">
+<!--<form action="{% url 'lib:detail' %}" method="post" name="detail">-->
+<form action="{% url 'lib:process' %}" method="post" name="process">
+    {% csrf_token %}
+<!--    调用views1.py传递过来的值，然后显示-->
+    <p>{{ now }}</p>
+    <p>{{ qiu }}</p>
+<table align="center">
+    <tr align="center">
+        Welcome back,My private Bookstore！
+    </tr>
+    <tr align="center">
+        <p>
+            <input type="submit" name="button_1" value="Bookstore Enter">
+            <input type="submit" name="button_2" value="Vote">
+        </p>
+    </tr>
+</table>
+    <!--<input type="submit" value="进入">-->
+</form>
+
+<HR>
+<form align=center action="/hello/upload" method="get" name="index">
+<!--    {% csrf_token %}-->
+    <tr>
+        <td><p>funtion two, uploadable a number of files and then push something image to prediction.</p></td>
+        <td><input type="submit" value="Upload Files to Prediction"></td>
+    </tr>
+</form>
+
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta content="text/html; charset=utf-8">
+  <title>Show Image</title>
+  <link rel="stylesheet" href="/static/css/style.css" />
+  <!--  增加了bootstrap.min.css后网页的样式会有一些变化-->
+  <link rel="stylesheet" href="/static/css/bootstrap.min.css" /> </head>
+<!--可以在/static/css/style.css文件中定义，也可以在html中使用<style type="text/css"> </style>定义，效果一样，推荐css中定义，通用性好-->
+<!--<style type="text/css">-->
+<!--  body{-->
+<!--	max-width: 1000px;-->
+<!--    background-color: lightblue;-->
+<!--    width:500px;-->
+<!--    margin: auto;-->
+<!--    border: 3px solid #73AD21;-->
+<!--}-->
+<!--  body{-->
+<!--    overflow-x:hidden;-->
+<!--    overflow-y:hidden;-->
+<!--}-->
+<!--  .name_color{-->
+<!--    color: green;-->
+<!--}-->
+<!--</style>-->
+<script type="text/javascript">
+  function del_confirm()
+  {
+  var r=confirm("Are you sure delete file!");
+  if (r==true)
+    {
+    alert("run delete file!");
+    return true;
+    }
+  else
+    {
+    alert("delete operate cancel!");
+    return false;
+    }
+  }
+</script>
+<body>
+  <table align="center" border="1">
+    <tr> {% for img in imgs %}
+      <td><img src="http://{{ host }}/static/{{ img.img }}" alt="画像" width="300" height="300" border="0" /> </td> {% endfor %} </tr>
+    <tr> {% for img in imgs %}
+      <td align="center"><a href="/static/{{ img.img }}" style="color:#0fff0c;"><button>Original Image</button></a></td> {% endfor %} </tr>
+    <form action="/hello/delete/" method="POST" name="delete"> {% csrf_token %}
+      <tr> {% for img in imgs %}
+        <td align="center" class="name_color_red"> <input type="checkbox" name="checks[]" value={{img.id}}> <input type="submit" name=delete onclick="del_confirm()" value="Delete Image"></td>{% endfor %} </tr>
+    </form>
+    <tr> {% for img in imgs %}
+      <td>File Name: {{ img.name }}</td> {% endfor %} </tr>
+    <tr> {% for prediction_result in prediction_results %}
+      <td class="name_color">Prediction Result: {{prediction_result}}</td> {% endfor %} </tr>
+    <tr> {% for result in result_set %}
+      <td>
+        <div class="name_color">Prediction TOP 5:</div> {{result}}</td> {% endfor %} </tr>
+    <form action="/hello/prediction/" method="POST" name="prediction"> {% csrf_token %}
+      <tr> {% for img in imgs %}
+        <td><input type="checkbox" name="checks[]" value={{forloop.counter0}}>Are you to predict?</td> {% endfor %} </tr>
+      <tr>
+        <td align="center" colspan="6"><input type="submit" style="color:#0fff0c;" value="Prediction Image"></td>
+      </tr>
+    </form>
+  </table>
+  <HR>
+  <table align="center">
+    <td><a href="/hello/upload" style="color:#0fff0c;"><button>Back to Upload</button></a></td>
+  </table>
+</body>
+</html>

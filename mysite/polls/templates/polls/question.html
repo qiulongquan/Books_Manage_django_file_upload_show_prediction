@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Question Show</title>
+</head>
+<body>
+<table align=center>
+    <tr>
+        <td>Question</td>
+        <td>Publish Date</td>
+    </tr>
+{% for question in question_list.all %}
+    <tr>
+        <td>{{ question.question_text }}</td>
+        <td>{{ question.pub_date }}</td>
+        <td><a href="{% url 'polls:replyQuestion' question.id %}">Reply Question</a></td>
+        <td><a href="{% url 'polls:delQuestion' question.id %}">Delete Question</a></td>
+    </tr>
+{% endfor %}
+</table>
+<form align=center action="{% url 'polls:addQuestion' %}" method="post" name="addQuestion">
+    {% csrf_token %}
+    <p><span>Question：</span><input type="text"  name="question_text"></p>
+    <input type="submit" value="Push Question">
+</form>
+
+<HR>
+<form align=center action="{% url 'lib:index' %}" method="post" name="return">
+    {% csrf_token %}
+    <input type="submit" value="Previous">
+</form>
+</body>
+</html>

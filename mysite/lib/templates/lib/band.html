@@ -1,0 +1,9 @@
+{% block content1 %}
+<p>customization</p>
+{% endblock %}
+
+
+{% extends "myapp1/base.html" %}
+{% block content1 %}
+<h1>Hello, {{fname}}!</h1>
+{% endblock %}

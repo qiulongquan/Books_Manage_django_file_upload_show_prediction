@@ -1,0 +1,15 @@
+html,body{
+	/*max-width: 480px;*/
+	/*background-color: #f6f6f6;*/
+	/*margin: 0 auto;*/
+	/*font-family: monospace;*/
+}
+
+.name_color{
+    color: green;
+}
+
+.name_color_red{
+    color: red;
+}
+

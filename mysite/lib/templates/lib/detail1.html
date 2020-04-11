@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Django Test</title>
+</head>
+<body>
+<table>
+    <tr>
+        <td>Book name</td>
+        <td>Author</td>
+        <td>Publishing House</td>
+        <td>Publish Date</td>
+    </tr>
+{% for book in book_list.all %}
+    <tr>
+        <td>{{ book.name }}</td>
+        <td>{{ book.author }}</td>
+        <td>{{ book.pub_house }}</td>
+        <td>{{ book.pub_date }}</td>
+        <td><a href="{% url 'lib:updateBook' book.id %}">Modify</a></td>
+        <td><a href="{% url 'lib:delBook' book.id %}">Delete</a></td>
+    </tr>
+{% endfor %}
+</table>
+<form action="{% url 'lib:addBook' %}" method="post" name="addBook">
+    {% csrf_token %}
+    <p><span>Book name：</span><input type="text"  name="name"></p>
+    <p><span>Author：</span><input type="text"  name="author"></p>
+    <p><span>Publishing House：</span><input type="text"  name="pub_house"></p>
+    <input type="submit" value="Add">
+</form>
+</body>
+</html>

@@ -1,0 +1,16 @@
+git reflog  查看reset的操作履历
+git reset HEAD  当前git add 的所有内容取消
+git reset HEAD^ 恢复到上一个commit的状态，但是文件的修改还保存着，
+如果想要完全恢复到上一个commit状态使用 git checkout .
+git reset cdf14a1(7位短的记录号)  恢复到指定commit版本的状态，但是文件的修改还保存着，
+如果想要完全恢复到上一个commit状态使用 git checkout .
+git checkout .  修改过的内容全部清除（恢复到上一个commit的状态）
+git log --abbrev-commit --pretty=oneline   当前前5个commit点记录显示（7位短的记录号形式）
+git log  当前前5个commit点记录显示
+
+
+Git のさまざまなツール - リビジョンの選択
+https://git-scm.com/book/ja/v2/Git-%E3%81%AE%E3%81%95%E3%81%BE%E3%81%96%E3%81%BE%E3%81%AA%E3%83%84%E3%83%BC%E3%83%AB-%E3%83%AA%E3%83%93%E3%82%B8%E3%83%A7%E3%83%B3%E3%81%AE%E9%81%B8%E6%8A%9E
+
+Gitコマンド早見表
+https://qiita.com/kohga/items/dccf135b0af395f69144
